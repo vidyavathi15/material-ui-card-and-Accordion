@@ -1,31 +1,25 @@
 import React, { useState } from "react";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 import {
   Box,
   FormControlLabel,
+  Switch,
   FormControl,
-  Checkbox,
-  FormLabel,
   FormGroup,
+  FormLabel,
 } from "@mui/material";
 
-function MuiCheckBox() {
-  const [acceptTnc, setAcceptTnc] = useState(false);
-
+export default function MuiSwitch() {
+  const [toggleSwitch, setToggleSwitch] = useState(false);
   const [skills, setSkills] = useState<string[]>([]);
-  console.log(skills)
 
-//   console.log({ acceptTnc });
-
-  const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAcceptTnc(event.target.checked);
+  const onToggleSwitch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setToggleSwitch(event.target.checked);
   };
+  console.log(toggleSwitch);
 
   const handleSkillChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const index = skills.indexOf(event.target.value);
-
     if (index === -1) {
       setSkills([...skills, event.target.value]);
     } else {
@@ -33,31 +27,24 @@ function MuiCheckBox() {
     }
   };
 
+  console.log(skills);
   return (
     <Box>
-      <Box>
-        <FormControlLabel
-          label="I accept Terms and conditions"
-          control={<Checkbox size="small" color="secondary"  checked={acceptTnc} onChange={onChangeCheckbox} />}
-        />
-      </Box>
+      <FormControlLabel
+        control={<Switch checked={toggleSwitch} onChange={onToggleSwitch} />}
+        label="Dark Mode"
+      />
 
       <Box>
-        <Checkbox
-          icon={<BookmarkBorderIcon />}
-          checkedIcon={<BookmarkIcon />}
-          checked={acceptTnc}
-          onChange={onChangeCheckbox}
-        />
-      </Box>
-      <Box>
-        <FormControl error> 
+        <FormControl>
           <FormLabel error>Skills</FormLabel>
           <FormGroup row>
-            <FormControlLabel 
+            <FormControlLabel
               label="HTML"
               control={
-                <Checkbox  size="small" color="secondary"
+                <Switch
+                  size="small"
+                  color="secondary"
                   value="html"
                   checked={skills.includes("html")}
                   onChange={handleSkillChange}
@@ -67,8 +54,10 @@ function MuiCheckBox() {
             <FormControlLabel
               label="CSS"
               control={
-                <Checkbox
-                  value="css"  size="small" color="secondary"
+                <Switch
+                  value="css"
+                  size="small"
+                  color="secondary"
                   checked={skills.includes("css")}
                   onChange={handleSkillChange}
                 />
@@ -77,7 +66,9 @@ function MuiCheckBox() {
             <FormControlLabel
               label="JAVASCRIPT"
               control={
-                <Checkbox  size="small" color="secondary"
+                <Switch
+                  size="small"
+                  color="secondary"
                   value="javascript"
                   checked={skills.includes("javascript")}
                   onChange={handleSkillChange}
@@ -90,5 +81,3 @@ function MuiCheckBox() {
     </Box>
   );
 }
-
-export default MuiCheckBox;
